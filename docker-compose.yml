@@ -1,0 +1,20 @@
+version: '3.0'
+services:
+  rasa:
+    image: rasa/rasa:latest-full
+    ports:
+      - 5005:5005
+    volumes:
+      - ./:/app
+    command:
+      - run
+  rasa_action_server:
+    image: rasa/rasa-sdk:latest
+    ports:
+      - 5055:5055
+    volumes:
+      - ./actions:/app/actions
+  rasa_duckling:
+    image: rasa/duckling
+    ports:
+      - 8000:8000
