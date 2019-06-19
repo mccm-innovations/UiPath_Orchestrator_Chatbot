@@ -8,7 +8,7 @@ pipeline:
 - name: "CRFEntityExtractor"
 - name: "DucklingHTTPExtractor"
   # url of the running duckling server
-  url: "http://localhost:8000"
+  url: "http://duckling:8000"
   # dimensions to extract
   dimensions: ["time", "number", "ordinal", "duration"]
   # if not set the default timezone of Duckling is going to be used

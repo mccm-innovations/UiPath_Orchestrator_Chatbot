@@ -1,20 +1,44 @@
 version: '3.0'
+
 services:
+
   rasa:
     image: rasa/rasa:latest-full
+    restart: always
     ports:
       - 5005:5005
     volumes:
-      - ./:/app
+      - .:/app
     command:
       - run
+    networks:
+      - rasa_network
+
   rasa_action_server:
-    image: rasa/rasa-sdk:latest
+    container_name: rasa_action_server
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: always
     ports:
       - 5055:5055
     volumes:
       - ./actions:/app/actions
-  rasa_duckling:
+    environment:
+      HOST: ${HOST}
+      TENANCY_NAME: ${TENANCY_NAME}
+      USERNAME_OR_EMAIL_ADDRESS: ${USERNAME_OR_EMAIL_ADDRESS}
+      PASSWORD: ${PASSWORD}
+    networks:
+      - rasa_network
+
+  duckling:
     image: rasa/duckling
+    restart: always
     ports:
       - 8000:8000
+    networks:
+      - rasa_network
+
+networks:
+  rasa_network:

@@ -1,5 +1,5 @@
 import requests
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import json
 import logging
@@ -18,8 +18,9 @@ logger.addHandler(fh)
 class UiPathAPI:
 
     def __init__(self):
-        load_dotenv()
+        # load_dotenv()
         self.host = os.getenv('HOST')
+        print(self.host)
         self.token = None
         self.headers = {
             'Content-Type': "application/json",
