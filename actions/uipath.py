@@ -49,13 +49,21 @@ class UiPathAPI:
         logger.info('Returning assets')
         return response.get('value')
 
-    def get_all_robots(self):
+    def get_all_robots(self, reporting_time_from=None, reporting_time_to=None, state=None):
         logger.info('Calling get_all_robots method...')
         url = self.host + '/odata/Sessions'
         payload = {
             '$select': 'State',
             '$expand': 'Robot'
         }
+        filter_clauses = []
+        if reporting_time_from: filter_clauses.append('ReportingTime gt {}'.format(reporting_time_from))
+        if reporting_time_to: filter_clauses.append('ReportingTime lt {}'.format(reporting_time_to))
+        if state: filter_clauses.append("State eq '{}'".format(state.title()))
+        if filter_clauses:
+            filter_clause = ' and '.join(filter_clauses)
+            payload['$filter'] = filter_clause
+            logger.info('[get_all_robots] Filter clause = {}'.format(filter_clause))
         response = requests.request("GET", url, params=payload, headers=self.headers, verify=False).json()
         logger.info('Returning robots')
         return response.get('value')
@@ -67,7 +75,7 @@ class UiPathAPI:
         logger.info('Returning sessions')
         return response.get('value')
 
-    def get_all_jobs(self, start_time_from=None, start_time_to=None, end_time_from=None, end_time_to=None, status=None):
+    def get_all_jobs(self, start_time_from=None, start_time_to=None, end_time_from=None, end_time_to=None, state=None):
         logger.info('Calling get_all_jobs method...')
         url = self.host + '/odata/Jobs'
         filter_clauses = []
@@ -75,7 +83,7 @@ class UiPathAPI:
         if start_time_to: filter_clauses.append('StartTime lt {}'.format(start_time_to))
         if end_time_from: filter_clauses.append('EndTime gt {}'.format(end_time_from))
         if end_time_to: filter_clauses.append('EndTime lt {}'.format(end_time_to))
-        if status: filter_clauses.append("State eq '{}'".format(status.title()))
+        if state: filter_clauses.append("State eq '{}'".format(state.title()))
         payload = {}
         if filter_clauses:
             filter_clause = ' and '.join(filter_clauses)
@@ -83,4 +91,43 @@ class UiPathAPI:
             logger.info('[get_all_jobs] Filter clause = {}'.format(filter_clause))
         response = requests.request("GET", url, params=payload, headers=self.headers, verify=False).json()
         logger.info('Returning jobs')
+        return response.get('value')
+
+    def get_all_queues(self, creation_time_from=None, creation_time_to=None):
+        logger.info('Calling get_all_queues method...')
+        url = self.host + '/odata/QueueDefinitions'
+        filter_clauses = []
+        if creation_time_from: filter_clauses.append('CreationTime gt {}'.format(creation_time_from))
+        if creation_time_to: filter_clauses.append('CreationTime lt {}'.format(creation_time_to))
+        payload = {}
+        if filter_clauses:
+            filter_clause = ' and '.join(filter_clauses)
+            payload['$filter'] = filter_clause
+            logger.info('[get_all_queues] Filter clause = {}'.format(filter_clause))
+        response = requests.request("GET", url, params=payload, headers=self.headers, verify=False).json()
+        logger.info('Returning queues')
+        return response.get('value')
+
+    def get_job_by_name(self, name):
+        logger.info('Calling get_job_by_name method...')
+        url = self.host + '/odata/Jobs'
+        payload = {
+            '$top': '1',
+            '$filter': "ReleaseName eq '{}'".format(name)
+        }
+        response = requests.request("GET", url, params=payload, headers=self.headers, verify=False).json()
+        logger.info('Returning job info with name: {}'.format(name))
+        return response.get('value')
+
+    def get_robot_by_name(self, name):
+        logger.info('Calling get_robot_by_name method...')
+        url = self.host + '/odata/Sessions'
+        payload = {
+            '$select': 'State',
+            '$expand': 'Robot',
+            '$top': '1',
+            '$filter': "Robot/Name eq '{}'".format(name)
+        }
+        response = requests.request("GET", url, params=payload, headers=self.headers, verify=False).json()
+        logger.info('Returning robot info with name: {}'.format(name))
         return response.get('value')

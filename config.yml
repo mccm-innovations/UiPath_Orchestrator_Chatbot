@@ -10,7 +10,7 @@ pipeline:
   # url of the running duckling server
   url: "http://duckling:8000"
   # dimensions to extract
-  dimensions: ["time", "number", "ordinal", "duration"]
+  dimensions: ["time", "number", "ordinal", "duration", "email"]
   # if not set the default timezone of Duckling is going to be used
   # needed to calculate dates from relative expressions like "tomorrow"
   timezone: "Europe/Berlin"

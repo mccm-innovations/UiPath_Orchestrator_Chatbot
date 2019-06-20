@@ -26,14 +26,42 @@
 * goodbye
   - utter_goodbye
   
-## ask_about_jobs
-* ask_about_jobs
-  - action_number_of_jobs_in_state
+## request summary of queues
+* request_summary_of_queues
+  - action_summary_of_queues
   
-## ask_about_robots
-* ask_about_robots
-  - action_number_of_robots_in_state
+## request info about a robot
+* request_robot_info
+  - action_robot_by_name
   
-## request_summary_of_jobs
+## ## request info about a robot path 1
+* request_summary_of_robots
+  - action_summary_of_robots
+  - utter_more_info_about_a_robot
+* request_robot_info
+  - action_robot_by_name
+  
+## request info about a robot path 2
+* request_summary_of_robots
+  - action_summary_of_robots
+  - utter_more_info_about_a_robot
+* deny
+  - utter_goodbye
+  
+## request info about a job
+* request_job_info
+  - action_job_by_name
+  
+## request info about a job path 1
 * request_summary_of_jobs
   - action_summary_of_jobs
+  - utter_more_info_about_a_job
+* request_job_info
+  - action_job_by_name
+  
+## request info about a job path 2
+* request_summary_of_jobs
+  - action_summary_of_jobs
+  - utter_more_info_about_a_job
+* deny
+  - utter_goodbye

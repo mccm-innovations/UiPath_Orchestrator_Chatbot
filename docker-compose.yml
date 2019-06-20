@@ -6,7 +6,7 @@ services:
     image: rasa/rasa:latest-full
     restart: always
     ports:
-      - 5005:5005
+      - 6000:5005
     volumes:
       - .:/app
     command:
@@ -21,7 +21,7 @@ services:
       context: .
     restart: always
     ports:
-      - 5055:5055
+      - 6001:5055
     volumes:
       - ./actions:/app/actions
     environment:
@@ -36,7 +36,7 @@ services:
     image: rasa/duckling
     restart: always
     ports:
-      - 8000:8000
+      - 6002:8000
     networks:
       - rasa_network
 

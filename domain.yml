@@ -1,16 +1,16 @@
 entities:
-  - robot_status
-  - job_status
+  - robot_state
+  - job_state
 
 slots:
-  robot_status:
+  robot_state:
     type: categorical
     values:
       - available
       - busy
       - unresponsive
       - disconnected
-  job_status:
+  job_state:
     type: categorical
     values:
       - pending
@@ -20,6 +20,10 @@ slots:
       - stopping
       - terminating
       - stopped
+  robot_name:
+    type: text
+  job_name:
+    type: text
 
 intents:
   - greet
@@ -28,9 +32,11 @@ intents:
   - deny
   - mood_great
   - mood_unhappy
-  - ask_about_jobs
-  - ask_about_robots
   - request_summary_of_jobs
+  - request_summary_of_queues
+  - request_summary_of_robots
+  - request_job_info
+  - request_robot_info
 
 actions:
 - utter_greet
@@ -38,10 +44,14 @@ actions:
 - utter_did_that_help
 - utter_happy
 - utter_goodbye
+- utter_more_info_about_a_job
+- utter_more_info_about_a_robot
 - action_joke
-- action_number_of_jobs_in_state
-- action_number_of_robots_in_state
 - action_summary_of_jobs
+- action_summary_of_queues
+- action_summary_of_robots
+- action_job_by_name
+- action_robot_by_name
 
 templates:
   utter_greet:
@@ -59,3 +69,9 @@ templates:
 
   utter_goodbye:
   - text: "Bye"
+
+  utter_more_info_about_a_job:
+  - text: "Do you want more information about a job?"
+
+  utter_more_info_about_a_robot:
+    - text: "Do you want more information about a robot?"
