@@ -4,13 +4,18 @@ services:
 
   rasa:
     image: rasa/rasa:latest-full
-    restart: always
+    depends_on:
+      - rasa_action_server
+      - duckling
+      - mongo_rasa
     ports:
-      - 6000:5005
+      - 8081:5005
     volumes:
       - .:/app
     command:
       - run
+      - --cors
+      - "*"
     networks:
       - rasa_network
 
@@ -19,9 +24,8 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    restart: always
     ports:
-      - 6001:5055
+      - 8082:5055
     volumes:
       - ./actions:/app/actions
     environment:
@@ -34,11 +38,46 @@ services:
 
   duckling:
     image: rasa/duckling
-    restart: always
     ports:
-      - 6002:8000
+      - 8083:8000
     networks:
       - rasa_network
 
+  mongo_rasa:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rasa
+      MONGO_INITDB_ROOT_PASSWORD: test19
+    networks:
+      - rasa_network
+
+  mongo-express_rasa:
+    image: mongo-express
+    depends_on:
+      - mongo_rasa
+    ports:
+      - 8084:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo_rasa
+      ME_CONFIG_MONGODB_ADMINUSERNAME: rasa
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test19
+    networks:
+      - rasa_network
+
+  nginx_rasa:
+    container_name: nginx_rasa
+    image: nginx:alpine
+    depends_on:
+      - rasa
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./webchat:/usr/share/nginx/html
+    ports:
+      - 8080:8080
+    networks:
+      - rasa_network
+
+
 networks:
   rasa_network:
+    external: true

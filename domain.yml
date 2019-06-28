@@ -1,18 +1,23 @@
 entities:
-  - robot_state
-  - job_state
+  - state
+  - robot_name
+  - job_name
+  - asset_name
+  - queue_name
+  - process_name
+  - number
+  - time
+  - ordinal
+  - duration
 
 slots:
-  robot_state:
+  state:
     type: categorical
     values:
       - available
       - busy
       - unresponsive
       - disconnected
-  job_state:
-    type: categorical
-    values:
       - pending
       - running
       - successful
@@ -20,58 +25,294 @@ slots:
       - stopping
       - terminating
       - stopped
+  job_state_check:
+    type: categorical
+    values:
+      - True
+      - False
+  robot_state_check:
+    type: categorical
+    values:
+      - True
+      - False
+  empty_result:
+    type: categorical
+    values:
+      - True
+      - False
   robot_name:
     type: text
   job_name:
     type: text
+  asset_name:
+    type: text
+  queue_name:
+    type: text
+  process_name:
+    type: text
+  job_list:
+    type: unfeaturized
+  robot_list:
+    type: unfeaturized
+  asset_list:
+    type: unfeaturized
+  queue_list:
+    type: unfeaturized
+  process_list:
+    type: unfeaturized
 
 intents:
   - greet
   - goodbye
-  - affirm
+  - thankyou
   - deny
-  - mood_great
-  - mood_unhappy
+  - number_employees
+  - number_sites
+  - work_for_tarmac
+  - be_an_apprentice
+  - get_in_touch
+  - customer_contact
+  - supplier_contact
+  - neighbour_contact
+  - journalist_contact
+  - leadership
+  - sustainability
+  - safety
+  - visit
+  - donations
+  - know_tarmac
+  - bot_age
+  - bot_who_am_i
+  - bot_job
+  - bot_mood
+  - bot_location
+  - help
   - request_summary_of_jobs
-  - request_summary_of_queues
+  - request_number_of_jobs
+  - request_job_info_by_name
+  - request_job_info_by_list_idx
+  - request_last_job
   - request_summary_of_robots
-  - request_job_info
-  - request_robot_info
+  - request_number_of_robots
+  - request_robot_info_by_name
+  - request_robot_info_by_list_idx
+  - request_last_robot
+  - request_summary_of_assets
+  - request_number_of_assets
+  - request_asset_info_by_name
+  - request_asset_info_by_list_idx
+  - request_last_asset
+  - request_summary_of_queues
+  - request_number_of_queues
+  - request_queue_info_by_name
+  - request_queue_info_by_list_idx
+  - request_last_queue
+  - request_summary_of_processes
+  - request_number_of_processes
+  - request_process_info_by_name
+  - request_process_info_by_list_idx
+  - request_last_process
+
 
 actions:
 - utter_greet
-- utter_cheer_up
-- utter_did_that_help
-- utter_happy
+- utter_thankyou
+- utter_msg_not_understood_and_reformulate
 - utter_goodbye
+- utter_further_question
+- utter_number_employees
+- utter_number_sites
+- utter_work_for_tarmac
+- utter_be_an_apprentice
+- utter_get_in_touch
+- utter_customer_contact
+- utter_supplier_contact
+- utter_neighbour_contact
+- utter_journalist_contact
+- utter_leadership
+- utter_sustainability
+- utter_safety
+- utter_visit
+- utter_donations
+- utter_know_tarmac
+- utter_bot_age
+- utter_bot_who_am_i
+- utter_bot_job
+- utter_bot_mood
+- utter_bot_location
+- utter_help
 - utter_more_info_about_a_job
-- utter_more_info_about_a_robot
-- action_joke
+- utter_wrong_job_state
+- action_default_fallback
+- action_job_state_check
+- action_get_jobs
 - action_summary_of_jobs
-- action_summary_of_queues
-- action_summary_of_robots
+- action_number_of_jobs
 - action_job_by_name
+- action_job_by_list_idx
+- action_get_last_job
+- utter_more_info_about_a_robot
+- utter_wrong_robot_state
+- action_robot_state_check
+- action_get_robots
+- action_summary_of_robots
+- action_number_of_robots
 - action_robot_by_name
+- action_robot_by_list_idx
+- action_get_last_robot
+- utter_more_info_about_an_asset
+- action_get_assets
+- action_summary_of_assets
+- action_number_of_assets
+- action_asset_by_name
+- action_asset_by_list_idx
+- action_get_last_asset
+- utter_more_info_about_a_queue
+- action_get_queues
+- action_summary_of_queues
+- action_number_of_queues
+- action_queue_by_name
+- action_queue_by_list_idx
+- action_get_last_queue
+- utter_more_info_about_a_process
+- action_get_processes
+- action_summary_of_processes
+- action_number_of_processes
+- action_process_by_name
+- action_process_by_list_idx
+- action_get_last_process
+
 
 templates:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey! How may I help you?"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_thankyou:
+  - text: "You are welcome!"
+  - text: "I am glad to help you!"
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_help:
+    - text: "I can assist you with the UiPath Orchestrator. You can ask me about **jobs**, **robots**, **processes**, **queues** and **assets**. However, I have not still learned to _start jobs_ or _create queues_. You can only ask me information about things that have been already created. For example: \n
+          - `Please, show me the summary of robots` \n
+          - `Show me the the summary of jobs of yesterday with the state faulted` \n
+          - `How many jobs are running?` \n"
 
-  utter_happy:
-  - text: "Great carry on!"
+  utter_msg_not_understood_and_reformulate:
+  - text: "Sorry, I did not understand that. Please, could you reformulate your question?"
+
+  utter_further_question:
+  - text: "All right! Can I help you with any other question?"
+  - text: "Roger that! Do you have any further question?"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Bye! Have a good day!"
+  - text: "See you soon! Have a great day!"
+  - text: "Bye! I will miss you!"
+
+  utter_number_employees:
+  - text: "We employ over 6,600 people"
+
+  utter_number_sites:
+  - text: "We have a network of over 330 sites across Great Britain and Northern Ireland from which we deliver aggregates, asphalt, cement, lime, readymix concrete, road contracting, building products and recycling services."
+
+  utter_work_for_tarmac:
+  - text: "The Tarmac team consists of over 6,600 people, working in a variety of professional administrative and operational roles across a nationwide network of more than 330 sites. We are passionate about our business and hire the best talent to help us meet our ambitious growth targets. If you want to be part of the brightest talent pool in the industry, please search our vacancies on the following link: https://tarmaccareers.com/"
+    url: "https://tarmaccareers.com/"
+
+  utter_be_an_apprentice:
+  - text: "We are very excited to be engaging with young people and training providers across the UK to recruit 60 apprentices across our business during 2014. We will be launching our recruitment campaign in March 2014 so please visit our site (https://tarmaccareers.com/)."
+    url: "https://tarmaccareers.com/"
+
+  utter_get_in_touch:
+  - text: "Thank you for your inquiry! Please, let me know who you are to see how can we help you."
+    buttons:
+      - title: "Customer"
+        payload: "/customer_contact"
+      - title: "Supplier"
+        payload: "/supplier_contact"
+      - title: "Neighbour"
+        payload: "/neighbour_contact"
+      - title: "Journalist"
+        payload: "/journalist_contact"
+
+  utter_customer_contact:
+  - text: "There are a number of ways that you can contact us. If you would like to get in touch with a specific site, please use the location finder (https://www.tarmac.com/location-finder/find-a-site/) to find sites and contact details. Alternatively, you could visit our contact page (https://www.tarmac.com/contact-old/) and we will respond to your request shortly."
+
+  utter_supplier_contact:
+  - text: "Please go to the procurement area (https://www.tarmac.com/customers-suppliers/) of the website for more information and contact details."
+    url: "https://www.tarmac.com/customers-suppliers/"
+
+  utter_neighbour_contact:
+  - text: "Please use the location finder (https://www.tarmac.com/location-finder/find-a-site/) to find your nearest site and its contact details. Please also see our community pages for more information about how Tarmac is working with the communities around our sites."
+    url: "https://www.tarmac.com/location-finder/find-a-site/"
+
+  utter_journalist_contact:
+  - text: "Tarmac's press office is operational 24-hours a day, 365 days per year: 08447 361199. If you would prefer to speak to one of our media team directly, please see our media centre (https://www.tarmac.com/news-and-media/) for contact details, and our latest news."
+    url: "https://www.tarmac.com/news-and-media/"
+
+  utter_leadership:
+  - text: "Please see the leadership section (https://www.tarmac.com/about-us/leadership/) for more information and biographies of our leadership team."
+    url: "https://www.tarmac.com/about-us/leadership/"
+
+  utter_sustainability:
+  - text: "Yes. Sustainability is at the heart of our business and influences everything we do. Our vision is to be our customers' preferred choice for sustainable construction solutions and this means thinking long-term economically, environmentally and socially. Economically, it means investing in more sustainable products which provide returns over the long-term, reducing costs both for us and our customers while improving our efficiency. Environmentally, it means that we reduce the impact on our surroundings and in turn ensure that our solutions reduce impact in use and production. Socially, it means ensuring that everyone who works with, or for, Tarmac is safe. It is ensuring that we work in harmony with the communities in which we operate and, that as a large business we play our part in the training of the younger generation by taking on apprentices. To help us in our goal to be truly sustainable, we have developed a sustainability framework and have appointed an independent group of external sustainability experts – a Sustainability Panel. For further information about our approach, please see our Sustainability Pages (https://www.tarmac.com/sustainability/)."
+    url: "https://www.tarmac.com/sustainability/"
+
+  utter_safety:
+  - text: "We are never complacent about safety and continually strive to meet the highest possible standards. Please see our Safety and Health (https://www.tarmac.com/customers-suppliers/safety-health/) overview for more information."
+    url: "https://www.tarmac.com/customers-suppliers/safety-health/"
+
+  utter_visit:
+  - text: "We encourage organised site visits and all of our sites are happy to receive requests directly. Please use the location finder (https://www.tarmac.com/location-finder/find-a-site/) to find your nearest site and its contact details."
+    url: "https://www.tarmac.com/location-finder/find-a-site/"
+
+  utter_donations:
+  - text: "We support the volunteering and fundraising efforts of our employees and have provided a donations policy. It also provides guidance on how external requests for donations are received, reviewed and responded to. To find out more please email us at customerhelpline@tarmac.com."
+
+  utter_know_tarmac:
+  - text: "Tarmac, a CRH company, is the UK’s leading sustainable building materials and construction solutions business. Our innovative services and solutions help to deliver the infrastructure needed to grow the economy today and create a more sustainable built environment to support our future prosperity."
+
+  utter_bot_age:
+  - text: "I am still young by your standards."
+  - text: "Quite young, but a million times smarter than you."
+
+  utter_bot_who_am_i:
+  - text: "The luckiest chatbot in the world since I work at Tarmac ;-)"
+
+  utter_bot_job:
+  - text: "I love helping customers and suppliers to find out information about Tarmac. Ask me whatever you want :-)"
+
+  utter_bot_mood:
+  - text: "I'm fine, thank you. How may I help you?"
+  - text: "Fine. How may I help you?"
+  - text: "I'm great thanks. How may I help you?"
+  - text: "Not so great. How may I help you?"
+  - text: "Very well, thanks. How may I help you?"
+
+  utter_bot_location:
+  - text: "I am from where all software programs are from; a galaxy far, far away..."
+  - text: "I'm everywhere."
+  - text: "Everywhere."
+  - text: "I am on the Internet."
+
+  utter_wrong_job_state:
+  - text: "I'm sorry, I haven't found this job state. Possible states are: **pending**, **running**, **successful**, **faulted**, **stopping**, **terminating** and **stopped**."
+
+  utter_wrong_robot_state:
+  - text: "I'm sorry, I haven't found this robot state. Possible states are: **available**, **busy**, **unresponsive** and **disconnected**."
 
   utter_more_info_about_a_job:
-  - text: "Do you want more information about a job?"
+  - text: "Do you want more information about a job? Type **job + job's id**. Example: job 3"
 
   utter_more_info_about_a_robot:
-    - text: "Do you want more information about a robot?"
+  - text: "Do you want more information about a robot? Type **robot + robot's id**. Example: robot 6"
+
+  utter_more_info_about_an_asset:
+  - text: "Do you want more information about an asset? Type **asset + asset's id**. Example: asset 2"
+
+  utter_more_info_about_a_queue:
+  - text: "Do you want more information about a queue? Type **queue + queue's id**. Example: queue 5"
+
+  utter_more_info_about_a_process:
+  - text: "Do you want more information about a process? Type **process + process' id**. Example: process 1"
+

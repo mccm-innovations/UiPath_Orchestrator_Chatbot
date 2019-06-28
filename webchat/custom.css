@@ -1,0 +1,34 @@
+:root{
+    --mccm-color-green-light:#8ec63e;
+    --mccm-color-green-dark: #377a0f;
+    --mccm-color-yellow:#dfe395;
+    --mccm-color-gray-dark:#76787c;
+    --mccm-color-gray-light:#c2c2c3;
+}
+
+* {
+  font-family: "Open Sans", Helvetica, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+.chat-container {
+  margin: 100px auto;
+  width: 700px;
+  z-index: 100;
+  box-shadow: 0 0 1em black;
+}
+
+@media (max-width: 400px) {
+  .chat-container {
+    margin: 20px 10px;
+    width: auto;
+  }
+}
+
+.chatroom h3, .chatroom .input {
+  background-color: var(--mccm-color-green-dark);
+}
+
+.chatroom .input input[type=submit]:hover, .chatroom #speech-input:hover{
+  background-color: var(--mccm-color-green-light);
+}
