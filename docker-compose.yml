@@ -3,6 +3,7 @@ version: '3.0'
 services:
 
   rasa:
+    container_name: rasa
     image: rasa/rasa:latest-full
     depends_on:
       - rasa_action_server
@@ -12,6 +13,9 @@ services:
       - 8081:5005
     volumes:
       - .:/app
+    environment:
+      MONGO_USERNAME: ${MONGO_USERNAME}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
     command:
       - run
       - --cors
@@ -22,21 +26,22 @@ services:
   rasa_action_server:
     container_name: rasa_action_server
     build:
-      dockerfile: Dockerfile
+      dockerfile: DockerfileActionServer
       context: .
     ports:
       - 8082:5055
     volumes:
       - ./actions:/app/actions
     environment:
-      HOST: ${HOST}
-      TENANCY_NAME: ${TENANCY_NAME}
-      USERNAME_OR_EMAIL_ADDRESS: ${USERNAME_OR_EMAIL_ADDRESS}
-      PASSWORD: ${PASSWORD}
+      HOST: ${ORCHESTRATOR_HOST}
+      TENANCY_NAME: ${ORCHESTRATOR_TENANCY_NAME}
+      USERNAME_OR_EMAIL_ADDRESS: ${ORCHESTRATOR_USERNAME_OR_EMAIL_ADDRESS}
+      PASSWORD: ${ORCHESTRATOR_PASSWORD}
     networks:
       - rasa_network
 
   duckling:
+    container_name: duckling
     image: rasa/duckling
     ports:
       - 8083:8000
@@ -44,14 +49,16 @@ services:
       - rasa_network
 
   mongo_rasa:
+    container_name: mongo_rasa
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: rasa
-      MONGO_INITDB_ROOT_PASSWORD: test19
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     networks:
       - rasa_network
 
   mongo-express_rasa:
+    container_name: mongo-express_rasa
     image: mongo-express
     depends_on:
       - mongo_rasa
@@ -59,8 +66,8 @@ services:
       - 8084:8081
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo_rasa
-      ME_CONFIG_MONGODB_ADMINUSERNAME: rasa
-      ME_CONFIG_MONGODB_ADMINPASSWORD: test19
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
     networks:
       - rasa_network
 

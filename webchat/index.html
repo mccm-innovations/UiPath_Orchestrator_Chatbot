@@ -7,18 +7,39 @@
     <link rel="stylesheet" type="text/css" href="custom.css">
     <title>UiPath Orchestrator ChatBot</title>
   </head>
+  <style>
+    .emoji{
+      font-size: 30px;
+    }
+    .warning-container{
+      width: 100%;
+    }
+    .warning{
+      background-color: orange;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      width: 50%;
+      margin: 0 auto;
+    }
+  </style>
   <body>
+    <div class="warning-container">
+      <div class="warning"><span class="emoji">&#128587;&#127995;</span>Please, <strong>DO NOT</strong> ask me things that are not related to the UiPath Orchestrator since I cannot understand them <span class="emoji">&#128519;</span></div>
+    </div>
     <div class="chat-container"></div>
     <script src="Chatroom.js"></script>
     <script type="text/javascript">
-      var welcomeMessage = "Hi! My name is **Ada**. How may I help you?\n" +
-              "I can assist you with the UiPath Orchestrator. You can ask me about **jobs**, **robots**, **processes**, **queues** and **assets**. However, I have not still learned to _start jobs_ or _create queues_. You can only ask me information about things that have been already created. For example:\n" +
-              "- `Please, show me the summary of robots`\n" +
-              "- `Show me the the summary of jobs of yesterday with the state faulted`\n" +
-              "- `How many jobs are running?`";
+      var welcomeMessage = "Hi! My name is **Ada** &#128105;.\n" +
+              "Please, **DO NOT** ask me things that are not related to the UiPath Orchestrator since I cannot understand them &#128519;.\n" +
+              "I can assist you with the **UiPath Orchestrator**. You can ask me about **jobs**, **robots**, **processes**, **queues** and **assets**. However, I have yet to learn how to _start jobs_ or _create queues_. You can only ask me information about things that have been already created. For example:\n" +
+              "- Please, show me the summary of robots\n" +
+              "- Show me the the summary of jobs of yesterday with the state faulted\n" +
+              "- How many jobs are running?" +
+              "\n\nHow may I help you?";
       var chatroom = new window.Chatroom({
         host: "http://localhost:8081",
-        title: "Chat with the Orchestrator ChatBot",
+        title: "Chat with the UiPath Orchestrator ChatBot",
         container: document.querySelector(".chat-container"),
         waitingTimeout: 10000,
         welcomeMessage: welcomeMessage,

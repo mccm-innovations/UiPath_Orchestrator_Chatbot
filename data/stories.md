@@ -100,6 +100,11 @@
 
   
 ## --------- ROBOTS --------- ##
+
+
+## request robot states
+* request_robot_states
+  - utter_robot_states
   
 ## request info about a robot
 * request_robot_info_by_name
@@ -169,6 +174,10 @@
   - utter_wrong_robot_state
   
 ## --------- JOBS --------- ##
+
+## request job states
+* request_job_states
+  - utter_job_states
   
 ## request info about a job
 * request_job_info_by_name

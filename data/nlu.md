@@ -228,6 +228,36 @@
 - help me
 - explain me how this chatbot works
 
+
+## intent:request_job_states
+- what are the statuses of a job
+- what are the states of a job
+- which are the statuses of a job
+- which are the states of a job
+- which are the possible states of a job
+- what are the possible states of a job
+- which are the valid states of a job
+- what are the valid statues of a job
+- what are the statuses of jobs
+- what are the states of jobs
+- which are the statuses of jobs
+- which are the states of jobs
+- which are the possible states of jobs
+- what are the possible states of jobs
+- which are the valid states of jobs
+- what are the valid statues of jobs
+- show me the statues of a job
+- please, show me the states of a job
+- please, show me the statuses of jobs
+- states of jobs
+- statuses of jobs
+- states of a job
+- statuses of a job
+- valid states of jobs
+- show me the valid statuses of jobs
+- show me the possible states of a job
+- show me which are the statuses of a job
+
 ## intent:request_summary_of_jobs
 - summary of jobs
 - summary of jobs between 4 and 5 hours
@@ -382,6 +412,35 @@
 
 
 
+
+## intent:request_robot_states
+- what are the statuses of a robot
+- what are the states of a robot
+- which are the statuses of a robot
+- which are the states of a robot
+- which are the possible states of a robot
+- what are the possible states of a robot
+- which are the valid states of a robot
+- what are the valid statues of a robot
+- what are the statuses of robots
+- what are the states of robots
+- which are the statuses of robots
+- which are the states of robots
+- which are the possible states of robots
+- what are the possible states of robots
+- which are the valid states of robots
+- what are the valid statues of robots
+- show me the statues of a robot
+- please, show me the states of a robot
+- please, show me the statuses of robots
+- states of robots
+- statuses of robots
+- states of a robot
+- statuses of a robot
+- valid states of robots
+- show me the valid statuses of robots
+- show me the possible states of a robot
+- show me which are the statuses of a robot
 
 
 

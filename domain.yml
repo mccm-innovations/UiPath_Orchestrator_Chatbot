@@ -92,11 +92,13 @@ intents:
   - request_job_info_by_name
   - request_job_info_by_list_idx
   - request_last_job
+  - request_job_states
   - request_summary_of_robots
   - request_number_of_robots
   - request_robot_info_by_name
   - request_robot_info_by_list_idx
   - request_last_robot
+  - request_robot_states
   - request_summary_of_assets
   - request_number_of_assets
   - request_asset_info_by_name
@@ -142,8 +144,9 @@ actions:
 - utter_bot_location
 - utter_help
 - utter_more_info_about_a_job
-- utter_wrong_job_state
 - action_default_fallback
+- utter_wrong_job_state
+- utter_job_states
 - action_job_state_check
 - action_get_jobs
 - action_summary_of_jobs
@@ -153,6 +156,7 @@ actions:
 - action_get_last_job
 - utter_more_info_about_a_robot
 - utter_wrong_robot_state
+- utter_robot_states
 - action_robot_state_check
 - action_get_robots
 - action_summary_of_robots
@@ -300,6 +304,12 @@ templates:
 
   utter_wrong_robot_state:
   - text: "I'm sorry, I haven't found this robot state. Possible states are: **available**, **busy**, **unresponsive** and **disconnected**."
+
+  utter_job_states:
+  - text: "Job states are: **pending**, **running**, **successful**, **faulted**, **stopping**, **terminating** and **stopped**."
+
+  utter_robot_states:
+  - text: "Robot states are: **available**, **busy**, **unresponsive** and **disconnected**."
 
   utter_more_info_about_a_job:
   - text: "Do you want more information about a job? Type **job + job's id**. Example: job 3"

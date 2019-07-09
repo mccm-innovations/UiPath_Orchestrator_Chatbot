@@ -27,8 +27,8 @@ action_endpoint:
 tracker_store:
   type: mongod
   url: mongodb://mongo_rasa:27017
-  username: rasa
-  password: test19
+  username: ${MONGO_USERNAME}
+  password: ${MONGO_PASSWORD}
 
 # Event broker which all conversation events should be streamed to.
 # https://rasa.com/docs/rasa/api/event-brokers/

@@ -1,17 +1,10 @@
 # Configuration for Rasa NLU.
 # https://rasa.com/docs/rasa/nlu/components/
 language: en
-#pipeline: supervised_embeddings
 pipeline:
-#- name: "SpacyNLP"
-#  model: "en_core_web_md"
-#  case_sensitive: false
 - name: "WhitespaceTokenizer"
 - name: "RegexFeaturizer"
 - name: "CRFEntityExtractor"
-#- name: "SpacyEntityExtractor"
-#  # dimensions to extract
-#  dimensions: ["ORDINAL", "CARDINAL"]
 - name: "DucklingHTTPExtractor"
   # url of the running duckling server
   url: "http://duckling:8000"
