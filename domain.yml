@@ -196,7 +196,7 @@ templates:
   - text: "I am glad to help you!"
 
   utter_help:
-    - text: "I can assist you with the UiPath Orchestrator. You can ask me about **jobs**, **robots**, **processes**, **queues** and **assets**. However, I have not still learned to _start jobs_ or _create queues_. You can only ask me information about things that have been already created. For example: \n
+    - text: "I can assist you with the UiPath Orchestrator. You can ask me about **jobs**, **robots**, **processes**, **queues** and **assets**. However, I have yet to learn how to _start jobs_ or _create queues_. You can only ask me information about things that have been already created. For example: \n
           - `Please, show me the summary of robots` \n
           - `Show me the the summary of jobs of yesterday with the state faulted` \n
           - `How many jobs are running?` \n"
