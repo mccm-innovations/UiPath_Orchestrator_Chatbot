@@ -4,12 +4,16 @@
 You can find an online demo of the chatbot in our website: [https://mccminnovations.com/webchat](https://mccminnovations.com/webchat).
 It is connected to the public Orchestrator of UiPath: https://platform.uipath.com.
 
+<p align="center">
+  <img src="webchat_screenshot.png" alt="UiPath Orchestrator Chatbot" width="500"/>
+</p>
+
 TODO GOOGLE ASSISTANT
 ## Inspiration
 
-Imagine a personal assistant that is capable to listen to your voice commands and read your typed texts in order to perform different daily work tasks, saving time and energy.  The UiPath Orchestrator Chatbot developed by MCCM Innovations allows you to review robots, processes, jobs, queues and assets of your UiPath Orchestrator environmnet using your voice or text questions.
+Imagine a personal assistant that is capable to listen to your voice commands and read your typed texts in order to perform different daily work tasks, saving time and energy. The UiPath Orchestrator Chatbot developed by MCCM Innovations allows you to review robots, processes, jobs, queues, and assets of your UiPath Orchestrator environment using your voice or text questions.
 
-Probably there are people in your RPA team that do not have access to the Orchestrator dashboard but they need to know in which state is a specific robot for example. This chatbot can help your teammates improving their productivity since they will not need to ask information to the robot controller. 
+Probably you have colleagues in your business that work alongside robots that do not have access to the Orchestrator dashboard but they need to know in which state a specific robot is. This chatbot can help your Robots Controller Center as it can be the first line of support to answer questions on how the robots are operating on a daily basis.
 
 Chatbots Market was worth USD 864.9 million in 2017 and is projected to reach USD 3146.4 million by 2023 growing at a CAGR of 24.1% over the period 2018 - 2023. The evolution and utilization of artificial intelligence applications are skyrocketing owing to its numerous benefits offered and rising consumer base. The rising number of messengers across the globe, the demand for chatbots which is capable of imitating human conversation and solving various tasks are on the rise. Numerous companies and startups are investing in the technology to ease their businesses and tackle customer’s queries. Source: [Chatbots market](https://www.mordorintelligence.com/industry-reports/chatbots-market).
 
@@ -55,7 +59,7 @@ _Queues_
 
 
 ## How we built it
-We built this chatbot using [Rasa](https://rasa.com/). Rasa is an open source framework that provides machine learning tools for developers to build, improve, and deploy contextual chatbots and assistants. We also developed an UiPath Orchestrator API connector in Python that makes calls to retrieve the information asked to the chatbot. Moreover, messages are stored in a MongoDB [MongoDB](https://www.mongodb.com) so they can be extracted, processed and used for re-training the Deep Learning models of Rasa. 
+We built this chatbot using [Rasa](https://rasa.com/). Rasa is an open source framework that provides machine learning tools for developers to build, improve, and deploy contextual chatbots and assistants. We also developed a Python connector for the [UiPath Orchestrator API](https://orchestrator.uipath.com/reference) that makes calls to retrieve the information asked to the chatbot. Moreover, messages are stored in a MongoDB [MongoDB](https://www.mongodb.com) so they can be extracted, processed and used for re-training the Deep Learning models of Rasa. 
 
 Once the user has asked something to the chatbot, it recognizes the user's intent applying a Deep Neural Network and the Python connector translates this information to make a query to the Orchestrator API. Finally, the Orchestrator's info is returned to the chatbot and displayed to the user in a user-friendly format.
 
