@@ -5,6 +5,7 @@ from rasa.core.channels.channel import UserMessage, InputChannel, CollectingOutp
 from asyncio import CancelledError
 from sanic import Blueprint, response
 from sanic.request import Request
+import random
 
 from typing import (
     Text,
@@ -49,11 +50,20 @@ class GoogleConnector(InputChannel):
             payload = request.json
             sender_id = payload['conversation']['conversationId']
             intent = payload['inputs'][0]['intent']
+            message_more = None
             if intent == 'actions.intent.MAIN':
-                message = "Hello! Welcome to the Orchestrator Fun Google Assistant skill developed by MCCM Innovations. You can start by saying help."
+                message = "Hello! Welcome to the Orchestrator Fun assistant developed by MCCM Innovations. You can start by saying help."
+                speech_messages = [message]
             else:
                 collector = CollectingOutputChannel()
                 text = payload['inputs'][0]['rawInputs'][0]['query']
+                speech_messages = [
+                    'Here you go!',
+                    'I have found the following information',
+                    'Of course!',
+                    'Doing my job!',
+                    'Sure, give me a second!'
+                ]
                 try:
                     await on_new_message(
                         UserMessage(
@@ -70,9 +80,12 @@ class GoogleConnector(InputChannel):
                         "An exception occured while handling "
                         "user message '{}'.".format(text)
                     )
-                responses = [m["text"].replace('*','').replace('_','').replace('-','').replace('\'','') for m in collector.messages]
+                responses = [m["text"].replace('*','').replace('_','').replace('-','').replace('`','') for m in collector.messages]
                 message = responses[0]
+                if len(responses) > 1:
+                    message_more = responses[1]
 
+            speech_message = random.choice(speech_messages)
             out_dict = {
                 "expectUserResponse": 'true',
                 "expectedInputs": [
@@ -87,9 +100,26 @@ class GoogleConnector(InputChannel):
                                 "items": [
                                     {
                                         "simpleResponse": {
-                                            "textToSpeech": message,
+                                            "textToSpeech": speech_message,
                                             'displayText': message
                                         }
+                                    }
+                                ],
+                                "suggestions": [
+                                    {
+                                        "title": "help"
+                                    },
+                                    {
+                                        "title": "summary of jobs"
+                                    },
+                                    {
+                                        "title": "summary of robots"
+                                    },
+                                    {
+                                        "title": "summary of processes"
+                                    },
+                                    {
+                                        "title": "summary of queues"
                                     }
                                 ]
                             }
@@ -97,6 +127,15 @@ class GoogleConnector(InputChannel):
                     }
                 ]
             }
+            if message_more:
+                out_dict['expectedInputs'][0]['inputPrompt']['richInitialPrompt']['items'].append(
+                    {
+                        "simpleResponse": {
+                            "textToSpeech": message_more,
+                            'displayText': message_more
+                        }
+                    }
+                )
 
             return response.json(out_dict)
 
