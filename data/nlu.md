@@ -383,6 +383,7 @@
 - show me more information about the robot [Ever Banega](robot_name)
 - show me information about the robot [Raul Bravo](robot_name)
 - show me more information about the robot [Carlos Aranda](robot_name)
+- show me more information about the robot [R2D2](robot_name)
 
 ## intent:request_robot_info_by_list_idx
 - yes, the robot one

@@ -81,6 +81,7 @@
 * request_summary_of_robots
   - action_robot_state_check
   - slot{"robot_state_check":"False"}
+  - slot{"state": null}
   - utter_wrong_robot_state
   
 ## request number of robots + valid robot state
@@ -94,6 +95,7 @@
 * request_number_of_robots
   - action_robot_state_check
   - slot{"robot_state_check":"False"}
+  - slot{"state": null}
   - utter_wrong_robot_state
   
 ## request last robot + valid robot state
@@ -107,6 +109,7 @@
 * request_last_robot
   - action_robot_state_check
   - slot{"robot_state_check":"False"}
+  - slot{"state": null}
   - utter_wrong_robot_state
   
 ## --------- JOBS --------- ##
@@ -152,6 +155,7 @@
 * request_summary_of_jobs
   - action_job_state_check
   - slot{"job_state_check":"False"}
+  - slot{"state": null}
   - utter_wrong_job_state
   
 ## request number of jobs + valid job state
@@ -165,6 +169,7 @@
 * request_number_of_jobs
   - action_job_state_check
   - slot{"job_state_check":"False"}
+  - slot{"state": null}
   - utter_wrong_job_state
   
 ## request last job + valid job state
@@ -178,6 +183,7 @@
 * request_last_job
   - action_job_state_check
   - slot{"job_state_check":"False"}
+  - slot{"state": null}
   - utter_wrong_job_state
   
   

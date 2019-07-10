@@ -45,7 +45,10 @@ class ActionRobotStateCheck(Action):
         domain,  # type:  Dict[Text, Any]
     ):  # type: (...) -> List[Dict[Text, Any]]
         state = tracker.get_slot('state').lower() if tracker.get_slot('state') else None
-        return [SlotSet('robot_state_check', state is None or state in api.ROBOT_STATES)]
+        slots = [SlotSet('robot_state_check', state is None or state in api.ROBOT_STATES)]
+        if state not in api.ROBOT_STATES:
+            slots.append(SlotSet('state', None))
+        return slots
 
 class ActionGetRobots(Action):
     def name(self):  # type: () -> Text
@@ -128,7 +131,7 @@ class ActionGetRobotByName(Action):
         domain,  # type:  Dict[Text, Any]
     ):  # type: (...) -> List[Dict[Text, Any]]
         robot_name = tracker.get_slot('robot_name')
-        robot = api.get_robot_by_name(name=robot_name)
+        robot = api.get_robot_by_name(name=robot_name, reporting_time=utils.calc_reporting_time())
         out_msg = 'Robot not found'
         if robot:
             out_msg = utils.dict_to_markdown(robot)
@@ -168,7 +171,10 @@ class ActionJobStateCheck(Action):
         domain,  # type:  Dict[Text, Any]
     ):  # type: (...) -> List[Dict[Text, Any]]
         state = tracker.get_slot('state').lower() if tracker.get_slot('state') else None
-        return [SlotSet('job_state_check', state is None or state in api.JOB_STATES)]
+        slots = [SlotSet('job_state_check', state is None or state in api.JOB_STATES)]
+        if state not in api.JOB_STATES:
+            slots.append(SlotSet('state', None))
+        return slots
 
 class ActionGetJobs(Action):
     def name(self):  # type: () -> Text
