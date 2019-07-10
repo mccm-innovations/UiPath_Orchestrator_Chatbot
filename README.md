@@ -59,7 +59,7 @@ _Queues_
 
 
 ## How we built it
-We built this chatbot using [Rasa](https://rasa.com/). Rasa is an open source framework that provides machine learning tools for developers to build, improve, and deploy contextual chatbots and assistants. We also developed an UiPath Orchestrator API connector in Python that makes calls to retrieve the information asked to the chatbot. Moreover, messages are stored in a MongoDB [MongoDB](https://www.mongodb.com) so they can be extracted, processed and used for re-training the Deep Learning models of Rasa. 
+We built this chatbot using [Rasa](https://rasa.com/). Rasa is an open source framework that provides machine learning tools for developers to build, improve, and deploy contextual chatbots and assistants. We also developed a Python connector for the [UiPath Orchestrator API](https://orchestrator.uipath.com/reference) that makes calls to retrieve the information asked to the chatbot. Moreover, messages are stored in a MongoDB [MongoDB](https://www.mongodb.com) so they can be extracted, processed and used for re-training the Deep Learning models of Rasa. 
 
 Once the user has asked something to the chatbot, it recognizes the user's intent applying a Deep Neural Network and the Python connector translates this information to make a query to the Orchestrator API. Finally, the Orchestrator's info is returned to the chatbot and displayed to the user in a user-friendly format.
 
