@@ -4,6 +4,10 @@
 You can find an online demo of the chatbot in our website: [https://mccminnovations.com/webchat](https://mccminnovations.com/webchat).
 It is connected to the public Orchestrator of UiPath: https://platform.uipath.com.
 
+<p align="center">
+  <img src="webchat_screenshot.png" alt="UiPath Orchestrator Chatbot" width="500"/>
+</p>
+
 TODO GOOGLE ASSISTANT
 ## Inspiration
 
