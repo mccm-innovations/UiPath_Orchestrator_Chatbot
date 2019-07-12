@@ -5,10 +5,15 @@ You can find an online demo of the chatbot in our website: [https://mccminnovati
 It is connected to the public Orchestrator of UiPath: https://platform.uipath.com.
 
 <p align="center">
-  <img src="webchat_screenshot.png" alt="UiPath Orchestrator Chatbot" width="500"/>
+  <img src="webchat_screenshot.png" alt="UiPath Orchestrator Webchat" width="400"/>
 </p>
 
-TODO GOOGLE ASSISTANT
+You can also start a conversation with our chatbot using Google Assistant with the voice command: `Talk to MCCM orchestrator chatbot`
+
+<p align="center">
+  <img src="google_assistant_screenshot.jpg" alt="UiPath Orchestrator Google Assistant" width="400"/>
+</p>
+
 ## Inspiration
 
 Imagine a personal assistant that is capable to listen to your voice commands and read your typed texts in order to perform different daily work tasks, saving time and energy. The UiPath Orchestrator Chatbot developed by MCCM Innovations allows you to review robots, processes, jobs, queues, and assets of your UiPath Orchestrator environment using your voice or text questions.
@@ -67,10 +72,14 @@ Once the user has asked something to the chatbot, it recognizes the user's inten
 Furthermore, this chabot can be connected to several messaging and voice channels easily. In this project, we provide configurations to deploy the Orchestrator Chatbot in a webchat (`webchat folder`) and in Google Assistant (`action.json file`), just for demo purposes. 
 
 ## Video demo
+
 ### Webchat
-[![UiPath Orchestrator Webchat Video Demo](https://img.youtube.com/vi/QV-r-tIgRIs/0.jpg)](https://www.youtube.com/watch?v=QV-r-tIgRIs "UiPath Orchestrator Webchat Video Demo")
+
+[![UiPath Orchestrator Webchat Video Demo](https://img.youtube.com/vi/kaFLsxYYKMc/0.jpg)](https://www.youtube.com/watch?v=kaFLsxYYKMc "UiPath Orchestrator Webchat Video Demo")
+
 ### Google Assistant
-TODO RECORD VIDEO USING THE GOOGLE ASSISTANT
+
+[![UiPath Orchestrator Google Assistant Video Demo](https://img.youtube.com/vi/kaFLsxYYKMc/0.jpg)](https://www.youtube.com/watch?v=kaFLsxYYKMc&t=151 "UiPath Orchestrator Google Assistant Video Demo")
 
 ## Installation
 
