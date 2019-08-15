@@ -130,6 +130,7 @@ Only the steps **2** and **5** are required after the first execution.
 
 ### How to use it
 Once the Docker container is running you can start using the chatbot in the webchat service. You should have access to the following services in your local machine:
+
 - Webchat: http://localhost:8080
 - Rasa: http://localhost:8081
 - Rasa action server:  http://localhost:8082
