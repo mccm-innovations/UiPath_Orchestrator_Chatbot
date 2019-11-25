@@ -1,5 +1,5 @@
 # Extend the official Rasa SDK image
-FROM rasa/rasa-sdk:latest
+FROM rasa/rasa-sdk:1.1.1
 
 COPY requirements.txt /app
 
