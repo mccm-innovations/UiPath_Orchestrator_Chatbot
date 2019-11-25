@@ -4,7 +4,7 @@ services:
 
   rasa:
     container_name: rasa
-    image: rasa/rasa:latest-full
+    image: rasa/rasa:1.1.3
     depends_on:
       - rasa_action_server
       - duckling
@@ -43,7 +43,7 @@ services:
 
   duckling:
     container_name: duckling
-    image: rasa/duckling
+    image: rasa/duckling:0.1.6.2
     ports:
       - 8083:8000
     networks:
@@ -51,7 +51,7 @@ services:
 
   mongo_rasa:
     container_name: mongo_rasa
-    image: mongo
+    image: mongo:4.2.1
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
@@ -60,7 +60,7 @@ services:
 
   mongo-express_rasa:
     container_name: mongo-express_rasa
-    image: mongo-express
+    image: mongo-express:0.49.0
     depends_on:
       - mongo_rasa
     ports:
@@ -74,7 +74,7 @@ services:
 
   nginx_rasa:
     container_name: nginx_rasa
-    image: nginx:alpine
+    image: nginx:1.17.6-alpine
     depends_on:
       - rasa
     volumes:
